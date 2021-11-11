@@ -1,0 +1,8 @@
+.product-bg{
+    background-image: url(../../../images/bg-item.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 40px;
+}
