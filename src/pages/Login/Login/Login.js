@@ -1,18 +1,18 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Alert, Button, Container, Grid, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import Footer from '../../Shared/Footer/Footer';
 import Header from '../../Shared/Header/Header';
-// import useAuth from '../../hooks/useAuth';
-// import { CircularProgress } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
-    // const { user, loginUser, authError, isLoading, googleWithSignIn } = useAuth();
+    const { user, loginUser, authError, isLoading, googleWithSignIn } = useAuth();
 
-    // const location = useLocation();
-    // const history = useHistory();
+    const location = useLocation();
+    const history = useHistory();
     const handleOnChange = e => {
         const field = e.target.name;
         const value = e.target.value;
@@ -23,12 +23,12 @@ const Login = () => {
     };
 
     const handleLoginSubmit = e => {
-        // loginUser(loginData.email, loginData.password, location, history)
+        loginUser(loginData.email, loginData.password, location, history)
         e.preventDefault();
     };
 
     const handleGoogleSignIn = () => {
-        // googleWithSignIn(location, history);
+        googleWithSignIn(location, history);
     }
 
     return (
@@ -62,9 +62,9 @@ const Login = () => {
                                 <Button variant="text">New User ? Please Register</Button>
                             </NavLink>
                         </form>
-                        {/* {isLoading && <CircularProgress />} */}
-                        {/* {user?.email && <Alert severity="success">Are You Login successfully !</Alert>} */}
-                        {/* {authError && <Alert severity="error">This is an error alert — check it out!</Alert>} */}
+                        {isLoading && <CircularProgress />}
+                        {user?.email && <Alert severity="success">Are You Login successfully !</Alert>}
+                        {authError && <Alert severity="error">This is an error alert — check it out!</Alert>}
                         <div>---------------------------or-----------------------------</div>
                         <Button onClick={handleGoogleSignIn} variant="contained">Google Sign In</Button>
                     </Grid>

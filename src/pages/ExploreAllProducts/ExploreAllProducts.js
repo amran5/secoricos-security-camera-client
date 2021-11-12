@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container, Grid, Typography } from '@mui/material';
-import Product from '../Product/Product';
 import { Box } from '@mui/system';
-import './Products.css';
+import ExploreAllProduct from './ExploreAllProduct/ExploreAllProduct';
+import Footer from '../Shared/Footer/Footer';
+import Header from '../Shared/Header/Header';
 
-
-const products = [
+const exploreAllProducts = [
     {
         name: "Reolink Argus 3 Pro",
         img: "https://i.ibb.co/bJ2XvY2/Reolink-Argus.png",
@@ -41,29 +41,56 @@ const products = [
         img: "https://i.ibb.co/D8RLhHH/Amcrest-4-MP-Ultra-HD-Indoor.jpg",
         description: "At SafeWise, we’re Amcrest fans, and this wireless indoor security camera doesn’t disappoint. Its remote pan-and-tilt function, easy setupand variety of video storage options.",
         price: "$69.60"
+    },
+    {
+        name: "Abode Iota",
+        img: "https://i.ibb.co/WxX6mkh/Abode-Iota.jpg",
+        description: "The Abode Iota is a high-end home security camera and security system in one. This compact device delivers two-way talk, high video quality,It also comes with the option to add 24/7 professional monitoring.",
+        price: "$320.00"
+    },
+    {
+        name: "Blink Indoor",
+        img: "https://i.ibb.co/8Bpbdbj/Blink-Indoor.jpg",
+        description: "Blink is an Amazon-owned security camera company that focuses on budget cameras. Its latest product is the Blink Indoor, an attractive little camera. You can buy this camera for about $80.",
+        price: "$79.99"
+    },
+    {
+        name: "YI Dome Camera",
+        img: "https://i.ibb.co/gR12SPC/YI-Dome.jpg",
+        description: "The YI Dome Camera makes us think a little of R2-D2. It’s cute and looks like the type of tech you can count on to stay in touch with kids and pets when you can’t be at home. The anti-noise filter makes it easy.",
+        price: "$47.00"
+    },
+    {
+        name: "Canary Pro",
+        img: "https://i.ibb.co/BCLFdw1/Canary-Pro.png",
+        description: "The Canary Pro combines home security features like a siren and environmental sensors with a smart home security camera. And don’t let the small, unobtrusive design fool you. Canary packed enough.",
+        price: "$169.99"
     }
 ]
-const Products = () => {
+
+const ExploreAllProducts = () => {
     return (
-        <Box className="product-bg">
-            <Container>
+        <Box className="allProducts-bg">
+            <Header></Header>
+            <Container sx={{ mb: 2 }}>
                 <Typography sx={{ fontWeight: 'medium', p: 4 }} style={{ fontWeight: 400 }} variant="h6" component="h6">
-                    OUR PRODUCTS
+                    OUR All PRODUCTS
                 </Typography>
                 <Typography sx={{ fontWeight: '550', pb: 4 }} style={{ color: 'rgba(7,7,25, 0.8)' }} variant="h4" component="h5">
                     Product We Provide
                 </Typography>
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {
-                        products.map(product => <Product
-                            key={product.name}
-                            product={product}
-                        ></Product>)
+                        exploreAllProducts.map(allProduct => <ExploreAllProduct
+                            key={allProduct.name}
+                            allProduct={allProduct}
+                        ></ExploreAllProduct>)
                     }
                 </Grid>
             </Container>
+            <Footer></Footer>
         </Box>
     );
 };
 
-export default Products;
+export default ExploreAllProducts;

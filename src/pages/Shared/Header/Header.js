@@ -1,36 +1,35 @@
+import { Button } from '@mui/material';
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
-
+import useAuth from '../../../hooks/useAuth';
+import './Header.css';
 const Header = () => {
+    const { user, logOut } = useAuth();
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar style={{ backgroundColor: 'rgba(7,7,25, 0.8)' }} position="static">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
-                        Secoricos
-                    </Typography>
-                    <NavLink to="home" style={{ textDecoration: "none", color: "white", marginRight: 20 }}>Home</NavLink>
-                    <NavLink to="dashboard" style={{ textDecoration: "none", color: "white" }}>Dashboard</NavLink>
-                    <NavLink style={{ textDecoration: "none", color: "white", marginLeft: 20 }} to="/login">Login</NavLink>
-                    <NavLink style={{ textDecoration: "none", color: "white", marginLeft: 20 }} to="/register">Register</NavLink>
-                </Toolbar>
-            </AppBar>
-        </Box>
+        <div className="nav">
+            <input type="checkbox" id="nav-check" />
+            <div className="nav-header">
+                <div className="nav-title">
+                    Secoricos
+                </div>
+            </div>
+            <div className="nav-btn">
+                <label for="nav-check">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+
+            <div className="nav-links">
+                <NavLink to="/home">Home</NavLink>
+                <NavLink to="/allProducts">Explore All Products</NavLink>
+                {user?.email && <NavLink to="/dashboard">Dashboard</NavLink>}
+                {user?.email && <Button onClick={logOut} style={{ color: "white" }}>Log Out</Button>}
+                {!user?.email && <NavLink to="/register">Register</NavLink>}
+                {!user?.email && <NavLink to="/login">Login</NavLink>}
+            </div>
+        </div>
     );
 };
 
