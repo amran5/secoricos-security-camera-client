@@ -67,7 +67,7 @@ const Register = () => {
                                 onBlur={handleOnBlur}
                                 variant="standard" />
                             <br />
-                            <Button variant="contained" type="submit">Register</Button>
+                            <Button style={{ backgroundColor: "#F5B041" }} variant="contained" type="submit">Register</Button>
                         </form>}
                         {isLoading && <CircularProgress />}
                         {user?.email && <Alert severity="success">Are You Login successfully !</Alert>}

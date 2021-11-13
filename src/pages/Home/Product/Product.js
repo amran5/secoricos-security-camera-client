@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import { Link } from 'react-router-dom';
 
 const Product = ({ product }) => {
-    const { name, img, description, price } = product;
+    const { name, img, description, price, _id } = product;
     return (
         <Grid item xs={12} sm={4} md={6}>
             <Card sx={{ minWidth: 275, border: 0, borderRadius: 5, boxShadow: 0, padding: 2 }}>
@@ -26,7 +26,7 @@ const Product = ({ product }) => {
                     <Typography style={{ fontWeight: 500 }} gutterBottom variant="h5" component="div">
                         {price}
                     </Typography>
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                    <Link to={`/purchases/${_id}`} style={{ textDecoration: "none" }}>
                         <Button style={{ backgroundColor: "#F5B041" }} variant="contained">Purchase</Button>
                     </Link>
                 </CardContent>

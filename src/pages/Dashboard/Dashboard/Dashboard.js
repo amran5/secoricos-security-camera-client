@@ -16,7 +16,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch } from "react-router-dom";
+import Pay from '../Pay/Pay';
+import MyOrders from '../MyOrders/MyOrders';
+import Review from '../Review/Review';
+import MakeAdmin from '../MakeAdmin/MakeAdmin';
+import './Dashboard.css';
+import AddProduct from '../AddProduct/AddProduct';
+import ManageProducts from '../ManageProducts/ManageProducts';
 
 const drawerWidth = 200;
 
@@ -24,16 +31,32 @@ function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
+    let { path, url } = useRouteMatch();
+
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
     const drawer = (
-        <div>
+        <div className="nested-nav">
             <Toolbar />
             <Divider />
-            <Link to="/appointment"><Button color="inherit">Appointment</Button></Link>
-            <List>
+            <Link to="/home"><Button color="inherit">Home</Button></Link>
+            <br />
+            <Link to={`${url}/myOrders`}><Button color="inherit">My Orders</Button></Link>
+            <br />
+            <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
+            <br />
+            <Link to={`${url}/manageProducts`}><Button color="inherit">Manage Products</Button></Link>
+            <br />
+            <Link to={`${url}/addProduct`}><Button color="inherit">Add A Product</Button></Link>
+            <br />
+            <Link to={`${url}/review`}><Button color="inherit">Review</Button></Link>
+            <br />
+            <Link to={`${url}/pay`}><Button color="inherit">Pay</Button></Link>
+            <br />
+            <Link to={`${url}/logout`}><Button color="inherit">Log Out</Button></Link>
+            {/* <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem button key={text}>
                         <ListItemIcon>
@@ -42,7 +65,7 @@ function Dashboard(props) {
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
-            </List>
+            </List> */}
         </div>
     );
 
@@ -58,7 +81,7 @@ function Dashboard(props) {
                     ml: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar>
+                <Toolbar style={{ backgroundColor: "rgba(7,7,25, 0.8)" }}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -109,9 +132,29 @@ function Dashboard(props) {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                <Typography paragraph>
-                    this is content
-                </Typography>
+                <Switch>
+                    <Route exact path={path}>
+                        <MyOrders />
+                    </Route>
+                    <Route path={`${path}/myOrders`}>
+                        <MyOrders />
+                    </Route>
+                    <Route path={`${path}/makeAdmin`}>
+                        <MakeAdmin />
+                    </Route>
+                    <Route path={`${path}/manageProducts`}>
+                        <ManageProducts />
+                    </Route>
+                    <Route path={`${path}/addProduct`}>
+                        <AddProduct />
+                    </Route>
+                    <Route path={`${path}/review`}>
+                        <Review />
+                    </Route>
+                    <Route path={`${path}/pay`}>
+                        <Pay />
+                    </Route>
+                </Switch>
             </Box>
         </Box>
     );

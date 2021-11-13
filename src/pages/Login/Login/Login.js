@@ -56,7 +56,7 @@ const Login = () => {
                                 onChange={handleOnChange}
                                 variant="standard" />
                             <br />
-                            <Button variant="contained" type="submit">Login</Button>
+                            <Button style={{ backgroundColor: "#F5B041" }} variant="contained" type="submit">Login</Button>
                             <br />
                             <NavLink style={{ textDecoration: 'none' }} to="/register">
                                 <Button variant="text">New User ? Please Register</Button>
@@ -64,9 +64,9 @@ const Login = () => {
                         </form>
                         {isLoading && <CircularProgress />}
                         {user?.email && <Alert severity="success">Are You Login successfully !</Alert>}
-                        {authError && <Alert severity="error">This is an error alert — check it out!</Alert>}
+                        {authError && <Alert severity="error">Try Again Use Email Or Password Write Correctly !!</Alert>}
                         <div>---------------------------or-----------------------------</div>
-                        <Button onClick={handleGoogleSignIn} variant="contained">Google Sign In</Button>
+                        <Button onClick={handleGoogleSignIn} style={{ backgroundColor: "#F5B041" }} variant="contained">Google Sign In</Button>
                     </Grid>
                 </Grid>
             </Container>
