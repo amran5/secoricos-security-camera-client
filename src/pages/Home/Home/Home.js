@@ -4,7 +4,7 @@ import Header from '../../Shared/Header/Header';
 import Banner from '../Banner/Banner';
 import OurExpress from '../OurExpress/OurExpress';
 import Products from '../Products/Products';
-import Review from '../Review/Review';
+import Reviews from '../Reviews/Reviews';
 
 const Home = () => {
     return (
@@ -13,7 +13,7 @@ const Home = () => {
             <Banner></Banner>
             <Products></Products>
             <OurExpress></OurExpress>
-            <Review></Review>
+            <Reviews></Reviews>
             <Footer></Footer>
         </div>
     );

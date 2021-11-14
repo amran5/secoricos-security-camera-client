@@ -2,7 +2,7 @@ import { Container, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 
-const Review = () => {
+const Reviews = () => {
     return (
         <Box className="product-bg">
             <Container>
@@ -25,4 +25,4 @@ const Review = () => {
     );
 };
 
-export default Review;
+export default Reviews;

@@ -4,7 +4,7 @@ import './ManageProducts.css';
 const ManageProducts = () => {
     const [allProducts, setAllProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/allProducts')
+        fetch('https://calm-peak-97207.herokuapp.com/allProducts')
             .then(res => res.json())
             .then(data => setAllProducts(data))
     }, []);
@@ -12,7 +12,7 @@ const ManageProducts = () => {
     const handleProduct = id => {
         const proceed = window.confirm('are you sure, you want to delete?')
         if (proceed) {
-            const url = `http://localhost:5000/allProducts/${id}`;
+            const url = `https://calm-peak-97207.herokuapp.com/allProducts/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
