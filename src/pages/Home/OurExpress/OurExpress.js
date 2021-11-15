@@ -7,7 +7,7 @@ const OurExpress = () => {
     const [expresses, setExpresses] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/express')
+        fetch('https://calm-peak-97207.herokuapp.com/express')
             .then(res => res.json())
             .then(data => setExpresses(data))
     }, [])
