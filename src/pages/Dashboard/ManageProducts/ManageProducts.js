@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import './ManageProducts.css';
 
@@ -37,7 +38,7 @@ const ManageProducts = () => {
                         <p>{allProduct.description.slice(0, 50)}</p>
                         <h3>{allProduct.price}</h3>
                         <br />
-                        <button style={{ backgroundColor: "#F5B041", color: "white", borderRadius: "5px", padding: "8px 16px", marginBottom: 5 }} onClick={() => handleProduct(allProduct._id)}>Delete</button>
+                        <Button variant="contained" style={{ backgroundColor: "#F5B041", color: "white", borderRadius: "5px", padding: "8px 16px", marginBottom: 5 }} onClick={() => handleProduct(allProduct._id)}>Delete</Button>
                     </div>)
                 }
             </div>

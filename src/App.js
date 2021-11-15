@@ -28,13 +28,13 @@ function App() {
             <PrivateRoute path="/purchases/:allProductId">
               <Purchases></Purchases>
             </PrivateRoute>
-            <Route path="/dashboard">
+            <PrivateRoute path="/dashboard">
               <Dashboard />
-            </Route>
-            <Route exact path="/Login">
+            </PrivateRoute>
+            <Route path="/Login">
               <Login />
             </Route>
-            <Route exact path="/register">
+            <Route path="/register">
               <Register />
             </Route>
             <Route path="*">

@@ -1,17 +1,20 @@
 import { Container, Grid, Typography } from '@mui/material';
-import React, { useState, useEffect } from 'react';
-import useAuth from '../../../hooks/useAuth';
-import Order from './Order/Order';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import ManageOrder from './ManageOrder/ManageOrder';
 
-const MyOrders = () => {
-    const { user } = useAuth();
+const ManageAllOrders = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setOrders(data))
-    }, [user.email]);
+        axios.get('http://localhost:5000/orders')
+            .then(result => {
+                setOrders(result.data);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }, [])
     return (
         <Container sx={{ mb: 2 }}>
             <Typography sx={{ fontWeight: 'medium', p: 4 }} style={{ fontWeight: 500 }} variant="h4" component="h6">
@@ -19,14 +22,14 @@ const MyOrders = () => {
             </Typography>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 {
-                    orders.map(order => <Order
+                    orders.map(order => <ManageOrder
                         key={order._id}
                         order={order}
-                    ></Order>)
+                    ></ManageOrder>)
                 }
             </Grid>
         </Container>
     );
 };
 
-export default MyOrders;
+export default ManageAllOrders;

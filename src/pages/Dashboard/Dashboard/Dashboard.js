@@ -24,12 +24,15 @@ import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import './Dashboard.css';
 import AddProduct from '../AddProduct/AddProduct';
 import ManageProducts from '../ManageProducts/ManageProducts';
+import useAuth from '../../../hooks/useAuth';
+import ManageAllOrders from './ManageAllOrders/ManageAllOrders';
 
 const drawerWidth = 200;
 
 function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const { logOut, admin } = useAuth();
 
     let { path, url } = useRouteMatch();
 
@@ -43,19 +46,23 @@ function Dashboard(props) {
             <Divider />
             <Link to="/home"><Button color="inherit">Home</Button></Link>
             <br />
-            <Link to={`${url}/myOrders`}><Button color="inherit">My Orders</Button></Link>
-            <br />
-            <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
-            <br />
-            <Link to={`${url}/manageProducts`}><Button color="inherit">Manage Products</Button></Link>
-            <br />
-            <Link to={`${url}/addProduct`}><Button color="inherit">Add A Product</Button></Link>
-            <br />
-            <Link to={`${url}/review`}><Button color="inherit">Review</Button></Link>
-            <br />
-            <Link to={`${url}/pay`}><Button color="inherit">Pay</Button></Link>
-            <br />
-            <Link to={`${url}/logout`}><Button color="inherit">Log Out</Button></Link>
+            {admin && <Box>
+                <Link to={`${url}/manageAllOrders`}><Button color="inherit">Manage All Orders</Button></Link>
+                <br />
+                <Link to={`${url}/addProduct`}><Button color="inherit">Add A Product</Button></Link>
+                <br />
+                <Link to={`${url}/manageProducts`}><Button color="inherit">Manage Products</Button></Link>
+                <br />
+                <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
+            </Box>}
+            {!admin && <Box>
+                <Link to={`${url}/myOrders`}><Button color="inherit">My Orders</Button></Link>
+                <br />
+                <Link to={`${url}/review`}><Button color="inherit">Review</Button></Link>
+                <br />
+                <Link to={`${url}/pay`}><Button color="inherit">Pay</Button></Link>
+            </Box>}
+            <Button onClick={logOut} color="inherit">Log Out</Button>
             {/* <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem button key={text}>
@@ -70,7 +77,6 @@ function Dashboard(props) {
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
-
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -133,14 +139,20 @@ function Dashboard(props) {
             >
                 <Toolbar />
                 <Switch>
-                    <Route exact path={path}>
+                    {!admin && <Route exact path={path}>
                         <MyOrders />
-                    </Route>
+                    </Route>}
+                    {admin && <Route exact path={path}>
+                        <ManageAllOrders />
+                    </Route>}
                     <Route path={`${path}/myOrders`}>
                         <MyOrders />
                     </Route>
                     <Route path={`${path}/makeAdmin`}>
                         <MakeAdmin />
+                    </Route>
+                    <Route path={`${path}/manageAllOrders`}>
+                        <ManageAllOrders />
                     </Route>
                     <Route path={`${path}/manageProducts`}>
                         <ManageProducts />

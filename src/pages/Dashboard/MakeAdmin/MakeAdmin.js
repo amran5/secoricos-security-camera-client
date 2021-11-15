@@ -1,42 +1,27 @@
-import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 const MakeAdmin = () => {
-    const [email, setEmail] = useState('');
-
-    const handleOnBlur = e => {
-        setEmail(e.target.value);
-    }
-
-    const handleMakeAdmin = e => {
-        const user = { email };
-        fetch('https://calm-peak-97207.herokuapp.com/users', {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
+    const { register, handleSubmit, reset } = useForm()
+    const MakeAdminHandle = data => {
+        axios.put('http://localhost:5000/users/admin', data)
+            .then(result => {
+                if (result.data.modifiedCount) {
+                    alert('Make Admin Successfully');
+                    reset();
+                }
             })
-        e.preventDefault();
-    }
+    };
     return (
         <div>
-            <h2>make a admin</h2>
-            <form onSubmit={handleMakeAdmin}>
-                <TextField
-                    // id="standard-basic" 
-                    label="email"
-                    onBlur={handleOnBlur}
-                    type="email"
-                    variant="standard"
-                />
-            </form>
-            <br />
-            <Button type="submit" variant="contained">Make Admin</Button>
+            <h1>Make A Admin</h1>
+            <div className="text-center">
+                <form className="input-form-box" onSubmit={handleSubmit(MakeAdminHandle)}>
+                    <input className="make-admin-input" type="email" placeholder="Enter your admin email" {...register('email')} required /><br />
+                    <input className="common-button" type="submit" value='Make Admin' />
+                </form>
+            </div>
         </div>
     );
 };

@@ -7,6 +7,7 @@ initializeAuthentication();
 
 const useFirebase = () => {
     const [user, setUser] = useState({});
+    const [admin, setAdmin] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [authError, setAuthError] = useState('');
     const googleProvider = new GoogleAuthProvider();
@@ -21,7 +22,7 @@ const useFirebase = () => {
                 const newUser = { email, displayName: name };
                 setUser(newUser)
                 //save user to database 
-                // saveUser(email, name, 'POST')
+                saveUser(email, name, 'POST')
                 //sent name to firebase after creation
                 updateProfile(auth.currentUser, {
                     displayName: name
@@ -57,9 +58,8 @@ const useFirebase = () => {
                 const destination = location?.state?.from || '/';
                 history.replace(destination);
                 const user = result.user;
-                console.log(user);
                 //save user to database 
-                // saveUser(user.email, user.displayName, 'PUT')
+                saveUser(user.email, user.displayName, 'PUT')
             }).catch((error) => {
                 setAuthError(error.message);
             }).finally(() => setIsLoading(false));
@@ -78,6 +78,12 @@ const useFirebase = () => {
         return () => unsubscribed;
     }, [auth]);
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [user.email]);
+
     const logOut = () => {
         setIsLoading(true);
         signOut(auth)
@@ -89,20 +95,21 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     };
 
-    // const saveUser = (email, displayName, method) => {
-    //     const user = { email, displayName };
-    //     fetch('https://calm-peak-97207.herokuapp.com/users', {
-    //         method: method,
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then()
-    // };
+    const saveUser = (email, displayName, method) => {
+        const user = { email, displayName };
+        fetch('http://localhost:5000/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then()
+    };
 
     return {
         user,
+        admin,
         registerUser,
         loginUser,
         logOut,

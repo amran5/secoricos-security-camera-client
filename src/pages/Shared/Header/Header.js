@@ -28,6 +28,7 @@ const Header = () => {
                 {user?.email && <Button onClick={logOut} style={{ color: "white" }}>Log Out</Button>}
                 {!user?.email && <NavLink to="/register">Register</NavLink>}
                 {!user?.email && <NavLink to="/login">Login</NavLink>}
+                <NavLink to="">{user?.displayName}</NavLink>
             </div>
         </div>
     );

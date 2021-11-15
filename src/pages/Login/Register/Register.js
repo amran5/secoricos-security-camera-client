@@ -71,7 +71,7 @@ const Register = () => {
                         </form>}
                         {isLoading && <CircularProgress />}
                         {user?.email && <Alert severity="success">Are You Login successfully !</Alert>}
-                        {authError && <Alert severity="error">Try Again Use Email Or Password Write Correctly !!</Alert>}
+                        {authError && <Alert severity="error">Try Again Please Register Email Or Password Write Correctly !!</Alert>}
                         <br />
                         <NavLink style={{ textDecoration: 'none' }} to="/login">
                             <Button variant="text">Already User ? Please Login</Button>

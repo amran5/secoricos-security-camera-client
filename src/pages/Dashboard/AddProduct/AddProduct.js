@@ -17,9 +17,11 @@ const AddProduct = () => {
     return (
         <div className="product-form">
             <h2>Add Product Here</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="input-form-box" onSubmit={handleSubmit(onSubmit)}>
                 <input {...register("name")} placeholder="name" />
+                <br />
                 <textarea {...register("description")} placeholder="description" />
+                <br />
                 <input type="number" {...register("price")} placeholder="price" />
                 <input {...register("img")} placeholder="img url" />
                 <input style={{ backgroundColor: "#F5B041", color: "white", borderRadius: "5px", marginRight: "5px", border: 0, padding: "4px 0" }} type="submit" />
