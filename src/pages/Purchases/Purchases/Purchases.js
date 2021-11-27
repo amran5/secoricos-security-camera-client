@@ -21,7 +21,7 @@ const Purchases = () => {
     }, [allProductId]);
     const HandleOrderSubmit = data => {
         data.orderData = product;
-        axios.post('http://localhost:5000/orders', data)
+        axios.post('https://calm-peak-97207.herokuapp.com/orders', data)
             .then(result => {
                 if (result.data.insertedId) {
                     alert('Your Order Submitted Successfully');
